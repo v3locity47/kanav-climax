@@ -1,0 +1,14 @@
+RewriteEngine On
+    #RewriteBase /2015/areese/
+	RewriteBase /
+	
+	#RewriteRule ^([a-zA-Z0-9_-]+)/([0-9]+)\ $ page.php?alias=1&cat_id=$2
+	#RewriteRule ^([a-zA-Z0-9_-]+)$ page.php?cat_nm=$1
+	RewriteRule ([a-zA-Z0-9_-]+)/([0-9]+)$ page.php?cat_nm=$1&&cat_id=$2
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php73” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

@@ -1,0 +1,18 @@
+@charset "utf-8";
+body {margin:0; padding:0; font:10px Arial, Helvetica, sans-serif; color:#000;}
+h1 { font:bold 26px/24px "Courier New", Courier, monospace; color:#000; letter-spacing:1px; margin:5px 0; padding:0}
+h2 { font:bold 10px Verdana, Geneva, sans-serif; color:#000}
+hr { margin:10px 0; padding:0; clear:both; background:none; border:none; border-top:2px solid #000; }
+
+h3 {font:bold 12px Tahoma, Geneva, sans-serif; color:#000; padding:0; margin:15px 0; }
+h4 {font:bold 11px Tahoma, Geneva, sans-serif; color:#000; padding:0; margin:15px 0; }
+
+.p_wfix{ width:640px; margin:0 auto; }
+.p_tbl_bo, table { border-bottom:1px solid #000; border-left:1px solid #000; }
+.p_tbl_bo tr td, table tr td { border-top:1px solid #000; border-right:1px solid #000; }
+
+.tbl_no_border, .tbl_no_border tr td{ border:none !important; }
+#top_space { height:160px; width:100%; }
+
+.st_pic_pr{ border:1px groove #000; height:85px; width:80px;}
+.f11 { font-size:11px; }
