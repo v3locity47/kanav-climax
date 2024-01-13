@@ -1,6 +1,7 @@
 <?php 
 ob_start();
-require_once '/home/climaxedu/public_html/vendor/autoload.php';
+// require_once '/home/climaxedu/public_html/vendor/autoload.php';
+require_once 'C:\Users\vel\Downloads\climax\vendor\autoload.php';
 session_start(); header('Cache-control: private');
 define('SITEROOT','/');
 
@@ -20,8 +21,9 @@ if(isset($_GET['do']) or !isset($_SESSION['shop_user_id']) or !isset($_SESSION['
 		?><script language="javascript"> window.location="<?=Root?>/index.php";</script>
 		<?php
 exit;}}
-mysql_select_db("climaxed_climaxsite",mysql_connect("localhost","climaxedu","2d[O)l&)]gge"));
-//mysql_select_db("climax",mysql_connect("localhost","root",""));
+$mysql_connection=mysqli_connect("localhost","root","root", "climaxedu", 3306);
+mysqli_select_db($mysql_connection, "climaxedu");
+//mysqli_select_db("climax",mysqli_connect("localhost","root",""));
 
 
 
@@ -31,7 +33,7 @@ mysql_select_db("climaxed_climaxsite",mysql_connect("localhost","climaxedu","2d[
 	foreach ($_POST as $key => $value) {
 		//if (isset($$key)) continue;
 		$$key=str_replace($chl_str,'',$value);
-		$$key=mysql_real_escape_string($$key);/*NEW*/
+		$$key=mysqli_real_escape_string($$key);/*NEW*/
 		//$$key = $value;
 	}
 	
@@ -46,13 +48,13 @@ $mov="<script language='javascript'>window.location='".$_SERVER['PHP_SELF']."';<
 
 
 	
-function menu_ls(){ global $menu_type; $fuqw=mysql_query("select * from  sy_menu order by menu_nm"); while($rty=mysql_fetch_object($fuqw)){?>
+function menu_ls(){ global $menu_type; $fuqw=mysqli_query("select * from  sy_menu order by menu_nm"); while($rty=mysqli_fetch_object($fuqw)){?>
     	<option value="<?=$rty->menu_id?>"><?=$rty->menu_nm?></option>
 	<?php } }
 
 
 function order_ls(){?><option value="250">Default</option><?php for($i=0;$i<=20;$i++){?><option value="<?=$i?>"><?=$i?></option><?php } }
-function menu_parent_ls($ttg){if($ttg==0){echo'Main Category';}else{$tg=mysql_query("select menu_nm from sy_menu where menu_id='$ttg'");$tg=mysql_fetch_object($tg);echo$tg->menu_nm;}}
+function menu_parent_ls($ttg){if($ttg==0){echo'Main Category';}else{$tg=mysqli_query("select menu_nm from sy_menu where menu_id='$ttg'");$tg=mysqli_fetch_object($tg);echo$tg->menu_nm;}}
 
 
 $u_order= array(0=>'Male',1=>'Female');
@@ -124,14 +126,14 @@ function sy_img($path,$nm){ $file=$nm;
 }
 // Get Menu List
 function sy_menu_w($j,$re,$attr=NULL){
-	$qry=mysql_query("select * from sy_menu where menu_parent='$j'order by menu_order");
-if(mysql_num_rows($qry)>0){
+	$qry=mysqli_query($GLOBALS['mysql_connection'],"select * from sy_menu where menu_parent='$j'order by menu_order");
+if(mysqli_num_rows($qry)>0){
 	
 	
 	
 	echo'<ul '.$attr.'>';$j='</ul>';}
 
-while($gh=mysql_fetch_object($qry)){
+while($gh=mysqli_fetch_object($qry)){
 	 
 		?> 
 <li><a  title="<?=$gh->menu_nm?>" <?php if(strlen($gh->menu_txt)>10 || $gh->menu_cat_type!=0 || $gh->sub_menu_status==1){
@@ -147,15 +149,15 @@ if($j=='</ul>'){echo $j;}
 //Get Parent Menu
  
 function menu_url($id){
-	$sql=mysql_query("select * from sy_menu where menu_id='$id'");
-	$ro=mysql_fetch_object($sql);
+	$sql=mysqli_query("select * from sy_menu where menu_id='$id'");
+	$ro=mysqli_fetch_object($sql);
 	return preg_replace('/[^a-zA-Z0-9\s]/', '', $ro->menu_nm).'/'.$ro->menu_id; 
 }
 
  
 function sy_gt_parents($gh,$hj,$synm){  
 if($gh!=0){ 
-	$nqry=mysql_query("select * from sy_menu where menu_id='$gh'"); $dtro=mysql_fetch_object($nqry);if($hj!=0){ echo  "<span>".$dtro->menu_nm.$synm."</span>";}else{echo $dtro->menu_nm; }
+	$nqry=mysqli_query("select * from sy_menu where menu_id='$gh'"); $dtro=mysqli_fetch_object($nqry);if($hj!=0){ echo  "<span>".$dtro->menu_nm.$synm."</span>";}else{echo $dtro->menu_nm; }
 	 if($hj!=0){sy_gt_parents($dtro->menu_parent,$hj,$synm);}
 	 }
  
@@ -167,7 +169,7 @@ $u_country =array ( 0 => "Afghanistan", 1 => "Albania", 2 => "Algeria", 3 => "Am
 if(isset($_GET['m_sub'])) {
 
 $message="";foreach ($_POST as $key => $value) {if(isset($$key)){$message .=$key.":-<B>".$value."</B> <br><br>";}}
-$RecepientName = 'avinashsaini37@gmail.com';//reciver
+$RecepientName = 'avinashsaini37gmail.com';//reciver
   
 $headers  = "MIME-Version: 1.0\r\n";
 $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";

@@ -1,11 +1,12 @@
 <?php
  require_once __DIR__ . '/vendor/autoload.php';
+ $mysql_connection =  mysqli_connect("localhost","root","root", "climaxedu", 3306);   
 
 $tit='Home'?>
 <?php require('themes/header.php')?>
  <h1 style="color:#000">Welcome </h1>
         <p align="justify">
-        <?php $sql=mysql_query("select * from sy_menu where menu_id=1"); $ro=mysql_fetch_object($sql); echo $ro->menu_txt?>
+        <?php $sql=mysqli_query($GLOBALS['mysql_connection'],"select * from sy_menu where menu_id=1"); $ro=mysqli_fetch_object($sql); echo $ro->menu_txt?>
         </p>
 <div align="center"><a href="About Climax/11" class="btn btn-success btn-sm" >Read More</a></div>
 <hr>
@@ -77,7 +78,7 @@ $tit='Home'?>
                     <div class="testimonial">
                         <h2>Latest News</h2>
                        <marquee  direction="up" scrollamount="1" scrolldelay="30" truespeed onmouseover="this.stop()" onmouseout="this.start()" style="text-align:justify; margin-bottom:10px">  
-                        <?php $sql=mysql_query("select * from sy_news order by news_dt desc limit 10"); while($ro=mysql_fetch_object($sql)){?>
+                        <?php $sql=mysqli_query($GLOBALS['mysql_connection'],"select * from sy_news order by news_dt desc limit 10"); while($ro=mysqli_fetch_object($sql)){?>
 		
 		
                          <div class="media testimonial-inner">
@@ -122,8 +123,8 @@ $tit='Home'?>
             <div class="row">
             
             <?php 
-			 $stf_qry=mysql_query("select * from sy_students order by msg_id desc limit 6");
-			 while($ro=mysql_fetch_object($stf_qry)){?>
+			 $stf_qry=mysqli_query($GLOBALS['mysql_connection'],"select * from sy_students order by msg_id desc limit 6");
+			 while($ro=mysqli_fetch_object($stf_qry)){?>
 
            
 
@@ -218,8 +219,8 @@ $tit='Home'?>
 
 
             <div class="row">
-            <?php $stf_qry=mysql_query("select * from sy_gallery  order by gal_id desc limit 8");
-			while($stf_ro=mysql_fetch_object($stf_qry)){
+            <?php $stf_qry=mysqli_query($GLOBALS['mysql_connection'],"select * from sy_gallery  order by gal_id desc limit 8");
+			while($stf_ro=mysqli_fetch_object($stf_qry)){
 			?>
                 <div class="col-xs-12 col-sm-4 col-md-3">
                     <div class="recent-work-wrap">
